@@ -1,17 +1,17 @@
-resource "digitalocean_domain" "boontouick" {
-  name = "boontouick.com"
+resource "digitalocean_domain" "domain" {
+  name = "${var.domain}.${var.tld}"
 }
 
-resource "digitalocean_record" "CNAME-www" {
-  domain = digitalocean_domain.boontouick.name
+resource "digitalocean_record" "A-GLPI" {
+  domain = digitalocean_domain.domain.name
   type   = "A"
-  name   = "glpi"
+  name   = var.host
   value  = digitalocean_droplet.web-1.ipv4_address
 }
 
 resource "digitalocean_project_resources" "dns" {
-  project   = digitalocean_domain.boontouick.id
+  project   = digitalocean_project.project.id
   resources = [
-    digitalocean_domain.boontouick.urn
+    digitalocean_domain.domain.urn
   ]
 }

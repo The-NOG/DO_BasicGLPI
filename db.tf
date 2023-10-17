@@ -25,7 +25,7 @@ resource "digitalocean_database_firewall" "glpi-fw" {
   }
 }
 resource "digitalocean_project_resources" "db" {
-  project = digitalocean_domain.boontouick.id
+  project = digitalocean_project.project.id
   resources = [
     digitalocean_database_cluster.mysql-glpi.urn
   ]

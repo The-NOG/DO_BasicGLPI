@@ -14,5 +14,5 @@ provider "digitalocean" {
 }
 
 data "digitalocean_ssh_key" "terraform" {
-  name = "chromebook"
+  name = var.sshkey
 }

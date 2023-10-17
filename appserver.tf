@@ -6,6 +6,7 @@ resource "digitalocean_droplet" "web-1" {
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
+  #user_data = templatefile(web-1.yaml)
 }
 resource "digitalocean_volume" "glpi-data" {
   region                  = "nyc3"
@@ -19,7 +20,7 @@ resource "digitalocean_volume_attachment" "glpi-data" {
   volume_id  = digitalocean_volume.glpi-data.id
 }
 resource "digitalocean_project_resources" "web-1" {
-  project = digitalocean_domain.boontouick.id
+  project = digitalocean_project.project.id
   resources = [
     digitalocean_droplet.web-1.urn
   ]
