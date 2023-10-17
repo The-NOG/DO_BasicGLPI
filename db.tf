@@ -11,9 +11,9 @@ resource "digitalocean_database_user" "glpi-user" {
   name       = var.glpi_db_user
 }
 
-output "db_pass" {
-  value = digitalocean_database_user.glpi-user.password
-  sensitive = true
+resource "digitalocean_database_db" "glpi-schema" {
+  cluster_id = digitalocean_database_cluster.mysql-glpi.id
+  name       = var.glpi_db_schema
 }
 
 resource "digitalocean_database_firewall" "glpi-fw" {
