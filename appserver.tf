@@ -6,7 +6,7 @@ resource "digitalocean_droplet" "web-1" {
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
-  #user_data = templatefile(web-1.yaml)
+  user_data = templatefile("web-1.tftpl", { ansible_user = var.ansible_user,ansible_public_key = var.ansible_public_key })
 }
 resource "digitalocean_volume" "glpi-data" {
   region                  = "nyc3"
