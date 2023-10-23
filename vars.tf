@@ -8,3 +8,6 @@ variable "sshkey" {}
 variable "ansible_user"{}
 variable "ansible_public_key" {}
 variable "glpi_version"{}
+variable "bootstraprepo"{}
+variable "bootstrapdir"{}
+variable "puppetrepo" {}
