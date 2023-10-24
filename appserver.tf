@@ -6,12 +6,9 @@ resource "digitalocean_droplet" "web-1" {
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
-  user_data = templatefile("web-1.yaml", { 
-    ansible_user = var.ansible_user,
-    ansible_public_key = var.ansible_public_key,
-    bootstrapdir = var.bootstrapdir,
-    bootstraprepo = var.bootstraprepo
-    puppetrepo = var.puppetrepo })
+  user_data = templatefile("Scripts/Deployment.sh", {
+    host = var.host, domain = var.domain, tld = var.tld,db_host = digitalocean_database_cluster.mysql-glpi.host,db_port=digitalocean_database_cluster.mysql-glpi.port,db_user=var.glpi_db_user,db_password=digitalocean_database_user.glpi-user.password,db_schema=var.glpi_db_schema
+  })
 }
 resource "digitalocean_volume" "glpi-data" {
   region                  = "nyc3"

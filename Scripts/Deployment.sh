@@ -42,8 +42,8 @@ echo "    <Directory /var/www/glpi/public>" >> /etc/apache2/sites-available/glpi
 echo "        Require all granted" >> /etc/apache2/sites-available/glpi.conf
 echo "        RewriteEngine On" >> /etc/apache2/sites-available/glpi.conf
 echo "        # Redirect all requests to GLPI router, unless file exists." >> /etc/apache2/sites-available/glpi.conf
-echo "        RewriteCond %{REQUEST_FILENAME} !-f" >> /etc/apache2/sites-available/glpi.conf
-echo "        RewriteRule ^(.*)$ index.php [QSA,L]" >> /etc/apache2/sites-available/glpi.conf
+echo "        RewriteCond %%{REQUEST_FILENAME} !-f" >> /etc/apache2/sites-available/glpi.conf
+echo "        RewriteRule ^(.*)$$ index.php [QSA,L]" >> /etc/apache2/sites-available/glpi.conf
 echo "    </Directory>" >> /etc/apache2/sites-available/glpi.conf
 echo "</VirtualHost>" >> /etc/apache2/sites-available/glpi.conf
 #symlink site file
