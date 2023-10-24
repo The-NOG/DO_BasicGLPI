@@ -3,7 +3,7 @@ resource "digitalocean_database_cluster" "mysql-glpi" {
   engine     = "mysql"
   version    = "8"
   size       = "db-s-1vcpu-1gb"
-  region     = "nyc1"
+  region     = "nyc3"
   node_count = 1
 }
 resource "digitalocean_database_user" "glpi-user" {
