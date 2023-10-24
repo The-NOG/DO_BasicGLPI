@@ -63,6 +63,7 @@ echo "   public \$use_utf8mb4 = true;" >> /var/www/glpi/config/config_db.php
 echo "   public \$allow_myisam = false;" >> /var/www/glpi/config/config_db.php
 echo "   public \$allow_datetime = false;" >> /var/www/glpi/config/config_db.php
 echo "   public \$allow_signed_keys = false;" >> /var/www/glpi/config/config_db.php
+echo "   public \$use_timezones = true;" >> /var/www/glpi/config/config_db.php
 echo "}" >> /var/www/glpi/config/config_db.php
 #own the webroot
 chown www-data:www-data /var/www/glpi -R
