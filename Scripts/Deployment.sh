@@ -72,9 +72,9 @@ echo "   public \$use_timezones = true;" >> /var/www/glpi/config/config_db.php
 echo "}" >> /var/www/glpi/config/config_db.php
 #own the webroot
 chown www-data:www-data /var/www/glpi -R
-chown www-data:www-data /mnt-data/files -R
+chown www-data:www-data /mnt/data/files -R
 #this is hacky and I hate it
-chown www-data:www-data /mnt-data/files -R | at now +10 minutes
+chown www-data:www-data /mnt/data/files -R | at now +10 minutes
 #delete install.php
 rm /var/www/glpi/install/install.php
 #restart apache
