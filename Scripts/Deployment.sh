@@ -10,15 +10,20 @@ cd /root/
 #Install Apache git php
 echo "Installing pre-reqs"
 apt update
-apt install at mysql-client git apache2 Php8.1 php8.1-xml php8.1-common php8.1-curl php8.1-gd php8.1-intl php8.1-mysqli php8.1-bz2 php8.1-phar php8.1-zip php8.1-exif php8.1-ldap Php8.1-opcache -y
+apt install at ufw mysql-client git apache2 Php8.1 php8.1-xml php8.1-common php8.1-curl php8.1-gd php8.1-intl php8.1-mysqli php8.1-bz2 php8.1-phar php8.1-zip php8.1-exif php8.1-ldap Php8.1-opcache -y
+#setup firewall
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow ssh
+ufw allow http
+ufw allow https
+ufw --force enable
 #download glpi
 wget -O glpi.tgz https://github.com/glpi-project/glpi/releases/download/10.0.10/glpi-10.0.10.tgz
 #extract glpi
 tar -xzf glpi.tgz -C /var/www/ 
 #delete tar
 rm glpi.tgz
-#delete files
-
 #check /mnt/data/files
 if [ -d "/mnt/data/files" ]
 then
