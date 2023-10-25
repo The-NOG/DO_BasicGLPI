@@ -10,7 +10,7 @@ cd /root/
 #Install Apache git php
 echo "Installing pre-reqs"
 apt update
-apt install at ufw mysql-client git apache2 Php8.1 php8.1-xml php8.1-common php8.1-curl php8.1-gd php8.1-intl php8.1-mysqli php8.1-bz2 php8.1-phar php8.1-zip php8.1-exif php8.1-ldap Php8.1-opcache -y
+apt install ufw mysql-client git apache2 Php8.1 php8.1-xml php8.1-common php8.1-curl php8.1-gd php8.1-intl php8.1-mysqli php8.1-bz2 php8.1-phar php8.1-zip php8.1-exif php8.1-ldap Php8.1-opcache -y
 #setup firewall
 ufw default deny incoming
 ufw default allow outgoing
@@ -73,8 +73,6 @@ echo "}" >> /var/www/glpi/config/config_db.php
 #own the webroot
 chown www-data:www-data /var/www/glpi -R
 chown www-data:www-data /mnt/data/files -R
-#this is hacky and I hate it
-chown www-data:www-data /mnt/data/files -R | at now +10 minutes
 #delete install.php
 rm /var/www/glpi/install/install.php
 #restart apache
