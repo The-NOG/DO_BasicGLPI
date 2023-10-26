@@ -35,7 +35,20 @@ else
 fi
 #symlink to volume
 ln -s /mnt/data/files /var/www/glpi
-
+#Check /mnt/data/plugins
+if [ -d "/mnt/data/plugins" ]
+then
+    #do Nothing
+    echo "plugins dir exists on shared"
+else
+    #create plugins dir on shared
+    mkdir /mnt/data/plugins
+fi
+#bind the dir to the dir. you CANNOT use a symlink
+mount --bind /mnt/data/plugins /var/www/glpi/plugins
+#persist mounting
+echo "/mnt/data/plugins /var/www/glpi/plugins none defaults,bind 0 0" >> /etc/fstab
+#configure Apache
 echo "Configuring apache"
 #Enable Rewrite
 a2enmod rewrite
@@ -73,6 +86,7 @@ echo "}" >> /var/www/glpi/config/config_db.php
 #own the webroot
 chown www-data:www-data /var/www/glpi -R
 chown www-data:www-data /mnt/data/files -R
+chown www-data:www-data /mnt/data/plugins -R
 #delete install.php
 rm /var/www/glpi/install/install.php
 #restart apache
