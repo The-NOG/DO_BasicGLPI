@@ -38,13 +38,16 @@ ln -s /mnt/data/files /var/www/glpi
 #Check /mnt/data/plugins
 if [ -d "/mnt/data/plugins" ]
 then
-    #Delete plugins dir
-    rm -rf /var/www/glpi/plugins
+    #do Nothing
+    echo "plugins dir exists on shared"
 else
-    #move file dir
-    mv /var/www/glpi/plugins /mnt/data/
+    #create plugins dir on shared
+    mkdir /mnt/data/plugins
 fi
-ln -s /mnt/data/plugins /var/www/glpi
+#bind the dir to the dir. you CANNOT use a symlink
+mount --bind /mnt/data/plugins /var/www/glpi/plugins
+#persist mounting
+echo "/mnt/data/plugins /var/www/glpi/plugins none defaults,bind 0 0" >> /etc/fstab
 #configure Apache
 echo "Configuring apache"
 #Enable Rewrite
