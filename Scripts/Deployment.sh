@@ -35,7 +35,17 @@ else
 fi
 #symlink to volume
 ln -s /mnt/data/files /var/www/glpi
-
+#Check /mnt/data/plugins
+if [ -d "/mnt/data/plugins" ]
+then
+    #Delete plugins dir
+    rm -rf /var/www/glpi/plugins
+else
+    #move file dir
+    mv /var/www/glpi/plugins /mnt/data/
+fi
+ln -s /mnt/data/plugins /var/www/glpi
+#configure Apache
 echo "Configuring apache"
 #Enable Rewrite
 a2enmod rewrite
@@ -73,6 +83,7 @@ echo "}" >> /var/www/glpi/config/config_db.php
 #own the webroot
 chown www-data:www-data /var/www/glpi -R
 chown www-data:www-data /mnt/data/files -R
+chown www-data:www-data /mnt/data/plugins -R
 #delete install.php
 rm /var/www/glpi/install/install.php
 #restart apache
